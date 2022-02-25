@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { dataset } from '../../mocks/dataset';
+import { Data } from '../../models/data';
 
 @Component({
   selector: 'app-andon-board',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./andon-board.component.scss'],
 })
 export class AndonBoardComponent implements OnInit {
-  dataSet: any;
+  data: Data;
+  config: any;
 
   constructor() {
-    this.dataSet = { type: 'Table' };
+    this.data = dataset;
+    this.config = { type: 'Table' };
   }
 
   ngOnInit(): void {}
