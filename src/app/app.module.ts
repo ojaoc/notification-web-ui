@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NZ_I18N, pt_PT } from 'ng-zorro-antd/i18n';
@@ -49,6 +50,7 @@ registerLocaleData(pt);
     NzCheckboxModule,
     NzGridModule,
     NzIconModule,
+    NzButtonModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_PT }],
   bootstrap: [AppComponent],

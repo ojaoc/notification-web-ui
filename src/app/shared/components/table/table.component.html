@@ -1,18 +1,13 @@
 <div class="table-container">
   <!-- Filter table -->
-  <div>
-    <button
-      type="button"
-      class="button icon-button table-util__customize-button"
-      nzPlacement="bottomRight"
-      (click)="showModal()"
-    >
+  <div class="filter-button-container">
+    <button nz-button nzType="default" (click)="showModal()">
       <app-filter-table-modal
         [(isVisible)]="isVisible"
         [(filterData)]="data"
       ></app-filter-table-modal>
 
-      <span class="material-icons"> filter_list </span>
+      <i nz-icon nzType="filter" nzTheme="outline"></i>
     </button>
   </div>
   <nz-list nzBordered>
