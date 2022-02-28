@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BoardStoreService } from 'src/app/shared/services/board-store.service';
 import { dataset } from '../../mocks/dataset';
-import { Data } from '../../models/data';
 
 @Component({
   selector: 'app-andon-board',
@@ -8,12 +8,9 @@ import { Data } from '../../models/data';
   styleUrls: ['./andon-board.component.scss'],
 })
 export class AndonBoardComponent implements OnInit {
-  data: Data;
-  config: any;
-
-  constructor() {
-    this.data = dataset;
-    this.config = { type: 'Table' };
+  constructor(public boardStore: BoardStoreService) {
+    boardStore.boardConfig = { type: 'Table' };
+    boardStore.boardData = dataset;
   }
 
   ngOnInit(): void {}

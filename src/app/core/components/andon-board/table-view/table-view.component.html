@@ -1,1 +1,6 @@
-<app-table [data]="data"></app-table>
+<app-table
+  [data]="boardStore.boardData"
+  [isEditingBoard]="boardStore.isEditingBoard"
+  [enableEdit]="boardStore.enableEdit"
+  [disableEdit]="boardStore.disableEdit"
+></app-table>

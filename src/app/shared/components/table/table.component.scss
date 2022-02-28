@@ -95,3 +95,7 @@ nz-list-header {
 .filter-button-container {
   margin: 0 0 1rem 0;
 }
+
+.filter-button-container > button:not(:last-child) {
+  margin-right: 0.9rem;
+}

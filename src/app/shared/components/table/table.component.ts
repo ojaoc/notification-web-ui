@@ -1,7 +1,7 @@
 import { CdkDragSortEvent, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Data } from 'src/app/core/models/data';
-import { FilterTableComponent } from '../filter-table-modal/filter-table-modal.component';
+import { FilterTableComponent } from './filter-table-modal/filter-table-modal.component';
 
 @Component({
   selector: 'app-table',
@@ -12,6 +12,10 @@ export class TableComponent implements OnInit {
   @ViewChild(FilterTableComponent) filterTableComponent!: FilterTableComponent;
 
   @Input() data: Data;
+  @Input() isEditingBoard: boolean;
+  @Input() enableEdit: () => void;
+  @Input() disableEdit: () => void;
+
   page: number;
   size: number;
   isVisible: boolean;
@@ -23,6 +27,9 @@ export class TableComponent implements OnInit {
     this.size = 10;
     this.isVisible = false;
     this.checked = true;
+    this.isEditingBoard = false;
+    this.enableEdit = () => {};
+    this.disableEdit = () => {};
   }
 
   showModal(): void {

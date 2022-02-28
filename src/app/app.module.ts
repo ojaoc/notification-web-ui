@@ -20,7 +20,7 @@ import { AndonBoardComponent } from './core/components/andon-board/andon-board.c
 import { KanbanViewComponent } from './core/components/andon-board/kanban-view/kanban-view.component';
 import { TableViewComponent } from './core/components/andon-board/table-view/table-view.component';
 import { ViewDirective } from './shared/components/directives/view/view.directive';
-import { FilterTableComponent } from './shared/components/filter-table-modal/filter-table-modal.component';
+import { FilterTableComponent } from './shared/components/table/filter-table-modal/filter-table-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { PaginationPipe } from './shared/pipes/pagination/pagination.pipe';
 

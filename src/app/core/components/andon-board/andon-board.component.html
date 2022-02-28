@@ -1,7 +1,11 @@
-<app-abstract-board *ngIf="(config.type | uppercase) === 'TABLE'">
-  <app-table-view [data]="data"></app-table-view>
+<app-abstract-board
+  *ngIf="(boardStore.boardConfig.type | uppercase) === 'TABLE'"
+>
+  <app-table-view></app-table-view>
 </app-abstract-board>
 
-<app-abstract-board *ngIf="(config.type | uppercase) === 'KANBAN'">
-  <app-kanban-view [data]="data"></app-kanban-view>
+<app-abstract-board
+  *ngIf="(boardStore.boardConfig.type | uppercase) === 'KANBAN'"
+>
+  <app-kanban-view></app-kanban-view>
 </app-abstract-board>
