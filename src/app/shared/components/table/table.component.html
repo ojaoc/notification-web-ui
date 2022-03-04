@@ -5,63 +5,102 @@
       <button nz-button nzType="default" (click)="showModal()">
         <app-filter-table-modal
           [(isVisible)]="isVisible"
-          [(filterData)]="data"
+          [innerFilterData]="innerFilterData"
+          (onFilterConfirm)="setColumnsFilter($event)"
         ></app-filter-table-modal>
 
         <i nz-icon nzType="filter" nzTheme="outline"></i>
       </button>
 
-      <button nz-button nzType="default" (click)="disableEdit()">
+      <button nz-button nzType="default" (click)="onSaveChanges.emit()">
         <i nz-icon nzType="save" nzTheme="outline"></i>
       </button>
 
-      <button nz-button nzType="primary" nzDanger (click)="disableEdit()">
+      <button
+        nz-button
+        nzType="primary"
+        nzDanger
+        (click)="onDiscardChanges.emit()"
+      >
         <i nz-icon nzType="delete" nzTheme="outline"></i>
       </button>
     </ng-template>
 
     <ng-template #toggleEditMode>
-      <button nz-button nzType="primary" (click)="enableEdit()">
+      <button nz-button nzType="primary" (click)="onEditEnable.emit()">
         <i nz-icon nzType="edit" nzTheme="outline"></i>
       </button>
     </ng-template>
   </div>
-  <nz-list nzBordered>
-    <div
-      nz-row
-      cdkDropList
-      cdkDropListOrientation="horizontal"
-      #todoList="cdkDropList"
-      [cdkDropListData]="data.columns"
-      class="example-list"
-      (cdkDropListSorted)="reorderCol($event)"
-    >
+  <ng-template [ngIf]="isEditingBoard" [ngIfElse]="noEditTableView">
+    <nz-list nzBordered>
       <div
-        nz-col
-        *ngFor="let column of data.columns"
-        cdkDragLockAxis="x"
-        cdkDrag
+        nz-row
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        #todoList="cdkDropList"
+        [cdkDropListData]="editableData.columns"
+        class="example-list"
+        (cdkDropListSorted)="reorderCol($event)"
       >
-        <div *ngIf="column.checked">
-          <nz-list-header class="example-box" cdkDragHandle>
-            {{ column.title }}
-            <i class="header-icon" nz-icon nzType="menu" nzTheme="outline"></i>
-          </nz-list-header>
-          <nz-list-item *ngFor="let item of data.data | pagination: page:size">
-            {{ item[column.name] }}
-          </nz-list-item>
+        <div
+          nz-col
+          *ngFor="let column of editableData.columns"
+          cdkDragLockAxis="x"
+          cdkDrag
+        >
+          <div *ngIf="column.checked ?? true">
+            <nz-list-header class="example-box" cdkDragHandle>
+              {{ column.title }}
+              <i
+                class="header-icon"
+                nz-icon
+                nzType="menu"
+                nzTheme="outline"
+              ></i>
+            </nz-list-header>
+            <nz-list-item
+              *ngFor="let item of editableData.data | pagination: page:size"
+            >
+              {{ item[column.name] }}
+            </nz-list-item>
+          </div>
         </div>
       </div>
+    </nz-list>
+    <div class="pagination-container">
+      <nz-pagination
+        [nzPageIndex]="page"
+        [nzTotal]="editableData.data.length"
+        nzShowSizeChanger
+        [nzPageSize]="size"
+        (nzPageIndexChange)="changePage($event)"
+        (nzPageSizeChange)="changeSize($event)"
+      ></nz-pagination>
     </div>
-  </nz-list>
-  <div class="pagination-container">
-    <nz-pagination
-      [nzPageIndex]="page"
-      [nzTotal]="data.data.length"
-      nzShowSizeChanger
-      [nzPageSize]="size"
-      (nzPageIndexChange)="changePage($event)"
-      (nzPageSizeChange)="changeSize($event)"
-    ></nz-pagination>
-  </div>
+  </ng-template>
+  <ng-template #noEditTableView>
+    <nz-table #basicTable [nzData]="data.data">
+      <thead>
+        <tr>
+          <th
+            *ngFor="let column of data.columns | filterOffByProperty: 'checked'"
+          >
+            {{ column.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let elem of basicTable.data">
+          <td
+            *ngFor="
+              let column of data['columns'] | filterOffByProperty: 'checked'
+            "
+          >
+            {{ elem[column.name] }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-template>
 </div>

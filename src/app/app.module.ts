@@ -14,6 +14,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTableModule } from 'ng-zorro-antd/table';
 import { AppComponent } from './app.component';
 import { AbstractBoardComponent } from './core/components/andon-board/abstract-board/abstract-board.component';
 import { AndonBoardComponent } from './core/components/andon-board/andon-board.component';
@@ -22,7 +23,9 @@ import { TableViewComponent } from './core/components/andon-board/table-view/tab
 import { ViewDirective } from './shared/components/directives/view/view.directive';
 import { FilterTableComponent } from './shared/components/table/filter-table-modal/filter-table-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
+import { FilterOffByPropertyPipe } from './shared/pipes/filter-off-by-property/filter-off-by-property.pipe';
 import { PaginationPipe } from './shared/pipes/pagination/pagination.pipe';
+import { BoardStoreService } from './shared/services/board-store.service';
 
 registerLocaleData(pt);
 
@@ -37,6 +40,7 @@ registerLocaleData(pt);
     FilterTableComponent,
     PaginationPipe,
     ViewDirective,
+    FilterOffByPropertyPipe,
   ],
   imports: [
     BrowserModule,
@@ -51,8 +55,9 @@ registerLocaleData(pt);
     NzGridModule,
     NzIconModule,
     NzButtonModule,
+    NzTableModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: pt_PT }],
+  providers: [{ provide: NZ_I18N, useValue: pt_PT }, BoardStoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

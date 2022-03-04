@@ -1,5 +1,14 @@
 import { CdkDragSortEvent, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Data } from 'src/app/core/models/data';
 import { FilterTableComponent } from './filter-table-modal/filter-table-modal.component';
 
@@ -8,13 +17,18 @@ import { FilterTableComponent } from './filter-table-modal/filter-table-modal.co
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
+  innerFilterData: Map<string, boolean>;
+
   @ViewChild(FilterTableComponent) filterTableComponent!: FilterTableComponent;
 
   @Input() data: Data;
+  @Input() editableData!: Data;
   @Input() isEditingBoard: boolean;
-  @Input() enableEdit: () => void;
-  @Input() disableEdit: () => void;
+
+  @Output() onEditEnable: EventEmitter<void>;
+  @Output() onDiscardChanges: EventEmitter<void>;
+  @Output() onSaveChanges: EventEmitter<void>;
 
   page: number;
   size: number;
@@ -28,19 +42,30 @@ export class TableComponent implements OnInit {
     this.isVisible = false;
     this.checked = true;
     this.isEditingBoard = false;
-    this.enableEdit = () => {};
-    this.disableEdit = () => {};
+    this.onEditEnable = new EventEmitter();
+    this.onDiscardChanges = new EventEmitter();
+    this.onSaveChanges = new EventEmitter();
+    this.innerFilterData = new Map<string, boolean>();
   }
 
   showModal(): void {
-    this.filterTableComponent.bootstrapComponent();
     this.isVisible = true;
   }
 
   ngOnInit(): void {}
 
+  ngOnChanges({ editableData }: SimpleChanges): void {
+    if (editableData?.currentValue) {
+      this.editableData.columns.forEach((elem) => {
+        this.innerFilterData.set(elem.title, elem.checked ?? true);
+      });
+    }
+  }
+
   reorderCol(
-    event: CdkDragSortEvent<{ name: string; title: string; checked: boolean }[]>
+    event: CdkDragSortEvent<
+      { name: string; title: string; checked?: boolean }[]
+    >
   ) {
     moveItemInArray(
       event.container.data,
@@ -55,5 +80,12 @@ export class TableComponent implements OnInit {
 
   changeSize(newSize: number) {
     this.size = newSize;
+  }
+
+  setColumnsFilter(newFilterData: Map<string, boolean>) {
+    this.editableData.columns = this.editableData.columns.map((column) => ({
+      ...column,
+      checked: newFilterData.get(column.title),
+    }));
   }
 }

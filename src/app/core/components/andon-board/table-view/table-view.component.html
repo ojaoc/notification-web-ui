@@ -1,6 +1,8 @@
 <app-table
   [data]="boardStore.boardData"
+  [editableData]="boardStore.editableBoardData"
   [isEditingBoard]="boardStore.isEditingBoard"
-  [enableEdit]="boardStore.enableEdit"
-  [disableEdit]="boardStore.disableEdit"
+  (onEditEnable)="boardStore.enableEdit()"
+  (onDiscardChanges)="boardStore.discardChanges()"
+  (onSaveChanges)="boardStore.saveChanges()"
 ></app-table>

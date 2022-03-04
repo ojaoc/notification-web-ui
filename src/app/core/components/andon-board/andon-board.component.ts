@@ -8,10 +8,10 @@ import { dataset } from '../../mocks/dataset';
   styleUrls: ['./andon-board.component.scss'],
 })
 export class AndonBoardComponent implements OnInit {
-  constructor(public boardStore: BoardStoreService) {
-    boardStore.boardConfig = { type: 'Table' };
-    boardStore.boardData = dataset;
-  }
+  constructor(public boardStore: BoardStoreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.boardStore.boardConfig = { type: 'Table' };
+    this.boardStore.boardData = dataset;
+  }
 }

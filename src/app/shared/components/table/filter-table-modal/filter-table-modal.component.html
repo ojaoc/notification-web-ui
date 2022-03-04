@@ -5,9 +5,16 @@
   (nzOnOk)="handleConfirm()"
 >
   <ng-container *nzModalContent>
-    <p class="example-box" *ngFor="let column of innerFilterData.columns">
-      <span nz-checkbox [(ngModel)]="column.checked">
-        {{ column.title }}
+    <p
+      class="example-box"
+      *ngFor="let keyValuePair of innerFilterData | keyvalue"
+    >
+      <span
+        nz-checkbox
+        (ngModelChange)="innerFilterData.set(keyValuePair.key, $event)"
+        [ngModel]="innerFilterData.get(keyValuePair.key)"
+      >
+        {{ keyValuePair.key }}
       </span>
     </p>
   </ng-container>

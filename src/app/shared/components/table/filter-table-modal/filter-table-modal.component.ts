@@ -1,61 +1,38 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+export interface CheckboxData {
+  title: string;
+}
 
 @Component({
   selector: 'app-filter-table-modal',
   templateUrl: './filter-table-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterTableComponent implements OnInit {
-  innerFilterData: any;
+  @Input() innerFilterData!: Map<string, boolean>;
 
-  @Input() filterData: any;
   @Input() isVisible: boolean;
 
   @Output() isVisibleChange: EventEmitter<boolean> = new EventEmitter();
-  @Output() filterDataChange: EventEmitter<any> = new EventEmitter();
+  @Output() onFilterConfirm: EventEmitter<Map<string, boolean>> =
+    new EventEmitter();
 
   constructor() {
     this.isVisible = false;
-    this.innerFilterData = { columns: [], data: [] };
-    this.filterData = { columns: [], data: [] };
   }
 
-  ngOnInit(): void {
-    this.bootstrapComponent();
-  }
+  ngOnInit(): void {}
 
-  async handleConfirm(): Promise<void> {
+  handleConfirm() {
     this.isVisible = false;
+
     this.isVisibleChange.emit(this.isVisible);
-
-    this.filterDataChange.emit(this.innerFilterData);
-
-    await this.delay(350);
-
-    this.bootstrapComponent();
+    this.onFilterConfirm.emit(this.innerFilterData);
   }
 
-  async handleCancel(): Promise<void> {
+  handleCancel() {
     this.isVisible = false;
+
     this.isVisibleChange.emit(this.isVisible);
-
-    await this.delay(350);
-
-    this.bootstrapComponent();
-  }
-
-  bootstrapComponent() {
-    this.innerFilterData = JSON.parse(JSON.stringify(this.filterData));
-  }
-
-  private delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
