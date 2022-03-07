@@ -27,3 +27,7 @@
 Cypress.Commands.add("clickEdit", () => {
   cy.get("i.anticon-edit").click();
 });
+
+Cypress.Commands.add("clickFilter", () => {
+  cy.get("i.anticon-filter").click();
+});

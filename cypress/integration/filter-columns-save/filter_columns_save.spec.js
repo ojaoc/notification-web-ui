@@ -1,15 +1,37 @@
 /// <reference types="cypress" />
 
-context("Filter columns, save", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:4200/");
-  });
+import { Then, When } from "cypress-cucumber-preprocessor/steps";
 
-  it("Clicking edit button makes filter, save and discard buttons appear", () => {
-    cy.clickEdit();
+When("User enables edit mode", () => {
+  cy.clickEdit();
+});
 
-    cy.get("i.anticon-filter").should("be.visible");
-    cy.get("i.anticon-save").should("be.visible");
-    cy.get("i.anticon-delete").should("be.visible");
+When("User opens filter edit modal", () => {
+  cy.clickFilter();
+});
+
+Then("Modal opens", () => {
+  cy.get("div.ant-modal-content")
+    .should("have.css", "background-color")
+    .and("eq", "rgb(255, 255, 255)");
+
+  cy.get("i.anticon-close").should("be.visible");
+
+  cy.contains("OK");
+  cy.contains("Cancelar");
+});
+
+Then("Modal shows correct number of columns", () => {
+  const numCols = cy.get("div.example-list").children().length;
+  cy.get("div.ant-modal-body").children().should("have.length", numCols);
+});
+
+Then("All checkboxes are selected", () => {
+  cy.get("div.ant-modal-body input").each(($el) => {
+    $el.invoke("prop", "ng-reflect-model").should("eq", "true");
   });
+});
+
+When('User deselects option labeled "Age"', () => {
+  cy.findByText("Age").click();
 });
