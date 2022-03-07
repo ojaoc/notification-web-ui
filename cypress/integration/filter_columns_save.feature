@@ -1,4 +1,7 @@
 Feature: User filters columns on table and saves changes
+    Background: User navigates to base route
+        Given User visits base route of app
+        Then Wait for page load
 
     Scenario: User enables edit mode, removes "Age" column and saves changes
         When User enables edit mode
