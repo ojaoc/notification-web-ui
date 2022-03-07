@@ -12,8 +12,8 @@ Feature: User filters columns on table and saves changes
         When User deselects option labeled "Age"
         When User confirms changes
         Then Modal closes
-        When Columns in edit mode already show changes
+        Then Columns in edit mode already show changes
         When User saves changes
         Then Table columns configuration is persisted
-        When Edit mode is disabled
+        Then Edit mode is disabled
 
