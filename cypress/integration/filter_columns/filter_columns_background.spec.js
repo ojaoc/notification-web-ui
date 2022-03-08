@@ -1,20 +1,20 @@
 /// <reference types="cypress" />
 
-import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
+import { Given, Then } from "cypress-cucumber-preprocessor/steps";
 
 Given("User visits base route of app", () => {
   cy.visit(Cypress.env("appUrl"));
 });
 
-Then("Wait for page load", () => {
+Given("User waits for page load", () => {
   cy.wait(1000);
 });
 
-When("User enables edit mode", () => {
+Given("User enables edit mode", () => {
   cy.clickEdit();
 });
 
-When("User opens filter edit modal", () => {
+Given("User opens filter edit modal", () => {
   cy.clickFilter();
 });
 
@@ -43,14 +43,4 @@ Then("All checkboxes are selected", () => {
   cy.get("span.ant-checkbox-wrapper").each(($el) => {
     cy.wrap($el).invoke("attr", "ng-reflect-model").should("eq", "true");
   });
-});
-
-When('User deselects option labeled "Age"', () => {
-  cy.get("div.ant-modal-body").findByText("Age").click();
-
-  cy.get("div.ant-modal-body")
-    .findByText("Age")
-    .parent()
-    .invoke("attr", "ng-reflect-model")
-    .should("eq", "false");
 });

@@ -34,3 +34,11 @@ Cypress.Commands.add("clickEdit", () => {
 Cypress.Commands.add("clickFilter", () => {
   cy.get("i.anticon-filter").click();
 });
+
+Cypress.Commands.add("clickSave", () => {
+  cy.get("i.anticon-save").click();
+});
+
+Cypress.Commands.add("clickDiscard", () => {
+  cy.get("i.anticon-delete").click();
+});
