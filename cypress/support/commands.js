@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import "@testing-library/cypress/add-commands";
+import '@4tw/cypress-drag-drop';
 
 Cypress.Commands.add("clickEdit", () => {
   cy.get("i.anticon-edit").click();
