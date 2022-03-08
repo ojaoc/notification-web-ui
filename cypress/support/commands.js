@@ -37,3 +37,7 @@ Cypress.Commands.add("clickFilter", () => {
 Cypress.Commands.add("clickSave", () => {
   cy.get("i.anticon-save").click();
 });
+
+Cypress.Commands.add("clickDiscard", () => {
+  cy.get("i.anticon-delete").click();
+});
