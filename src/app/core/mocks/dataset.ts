@@ -6,31 +6,37 @@ export const dataset: Data = {
       name: 'name',
       title: 'Name',
       checked: true,
+      id: 'nameId',
     },
     {
       name: 'age',
       title: 'Age',
       checked: true,
+      id: 'ageId',
     },
     {
       name: 'address',
       title: 'Address',
       checked: true,
+      id: 'addressId',
     },
     {
       name: 'phone',
       title: 'Phone',
       checked: true,
+      id: 'phoneId',
     },
     {
       name: 'email',
       title: 'Email',
       checked: true,
+      id: 'emailId',
     },
     {
       name: 'nationality',
       title: 'Nationality',
       checked: true,
+      id: 'nationalityId',
     },
   ],
   data: [

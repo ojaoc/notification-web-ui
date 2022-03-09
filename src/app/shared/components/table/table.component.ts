@@ -1,3 +1,4 @@
+import { dataset } from './../../../core/mocks/dataset';
 import { CdkDragSortEvent, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   Component,
@@ -62,9 +63,13 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
+  trackByColumnId(item: any) {
+    return item.columns.id;
+  }
+
   reorderCol(
     event: CdkDragSortEvent<
-      { name: string; title: string; checked?: boolean }[]
+      { name: string; title: string; checked?: boolean; id: string }[]
     >
   ) {
     moveItemInArray(

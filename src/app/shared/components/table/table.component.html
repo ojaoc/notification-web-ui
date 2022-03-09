@@ -46,11 +46,12 @@
         <div
           nz-col
           *ngFor="let column of editableData.columns"
+
           cdkDragLockAxis="x"
           cdkDrag
         >
           <div *ngIf="column.checked ?? true">
-            <nz-list-header class="example-box" cdkDragHandle>
+            <nz-list-header class="example-box" cdkDragHandle id="{{column.id}}">
               {{ column.title }}
               <i
                 class="header-icon"
