@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
+import { FilterOffByPropertyPipe } from '../../pipes/filter-off-by-property/filter-off-by-property.pipe';
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -8,7 +9,7 @@ describe('TableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TableComponent],
+      declarations: [TableComponent, FilterOffByPropertyPipe],
     }).compileComponents();
   });
 

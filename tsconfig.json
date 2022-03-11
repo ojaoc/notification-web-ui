@@ -19,9 +19,9 @@
     "target": "es2017",
     "module": "es2020",
     "lib": ["es2020", "dom"],
-    "allowSyntheticDefaultImports": true,
-    "types": ["cypress", "@testing-library/cypress", "@4tw/cypress-drag-drop"]
+    "allowSyntheticDefaultImports": true
   },
+  "include": ["**/*.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
