@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { When } from "cypress-cucumber-preprocessor/steps";
+import { Then, When } from "cypress-cucumber-preprocessor/steps";
 
 When('User deselects options labeled "Address" and "Phone"', () => {
   cy.get("div.ant-modal-body").findByText("Address").click();

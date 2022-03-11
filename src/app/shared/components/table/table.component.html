@@ -50,8 +50,8 @@
           cdkDragLockAxis="x"
           cdkDrag
         >
-          <div *ngIf="column.checked ?? true">
-            <nz-list-header class="example-box" cdkDragHandle id="{{column.id}}">
+          <div *ngIf="column.checked ?? true" [attr.col-id]="column.name">
+            <nz-list-header class="example-box" cdkDragHandle>
               {{ column.title }}
               <i
                 class="header-icon"
